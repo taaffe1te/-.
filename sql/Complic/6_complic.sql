@@ -1,0 +1,4 @@
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `imya` AS select `doctor`.`id_doctor` AS `id_doctor`,`doctor`.`surname` AS `surname`,`doctor`.`pasport` AS `pasport`,`doctor`.`adress` AS `adress`,`doctor`.`birthday` AS `birthday`,`doctor`.`specialization` AS `specialization`,`doctor`.`admissionn` AS `admissionn`,`doctor`.`dismissal` AS `dismissal`,`doctor`.`doctor_department` AS `doctor_department`,count(`medical_history`.`id_medical_history`) AS `quantity` from (`doctor` join `medical_history` on((`medical_history`.`medical_history_doctor` = `doctor`.`id_doctor`))) group by `doctor`.`id_doctor` order by count(`medical_history`.`id_medical_history`);
+SELECT * 
+FROM V join doctor using(id_doctor)
+WHERE quantity = (SELECT max(quantity) FROM Imya);
